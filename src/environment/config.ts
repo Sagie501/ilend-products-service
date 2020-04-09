@@ -1,6 +1,6 @@
 const baseConfig: Config = {
-  port: parseInt(process.env.PORT, 10) || 4000,
-  serviceName: process.env.SERVICE_NAME || 'Seed'
+  port: parseInt(process.env.PORT, 10) || 5000,
+  serviceName: process.env.SERVICE_NAME || 'Products Service'
 };
 
 export const config: EnvironmentConfig = {
