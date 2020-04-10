@@ -31,4 +31,21 @@ export class CategoryConnector {
       throw new Error(err.sqlMessage);
     })
   }
+
+  async removeFavoriteCategories(userId: number, categoriesIds: Array<number>) {
+    let promises = [];
+    for (let i = 0; i < categoriesIds.length; i++) {
+      promises.push(
+          this.knex('favorites_categories').where({
+            userId,
+            categoryId: categoriesIds[i]
+          }).del()
+      );
+    }
+    return Promise.all(promises).then(() => {
+      return this.knex.select('*').from('user').where({id: userId}).first();
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    })
+  }
 }

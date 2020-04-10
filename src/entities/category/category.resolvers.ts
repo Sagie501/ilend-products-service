@@ -7,6 +7,9 @@ export const resolvers = {
   Mutation: {
     addFavoriteCategories: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.categoryConnector.addFavoriteCategories(args.userId, args.categoriesIds);
+    },
+    removeFavoriteCategories: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.categoryConnector.removeFavoriteCategories(args.userId, args.categoriesIds);
     }
   },
   User: {

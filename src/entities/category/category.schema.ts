@@ -19,5 +19,6 @@ export const typeDefs = gql`
   
   extend type Mutation {
     addFavoriteCategories(userId: ID!, categoriesIds: [ID]!): User
+    removeFavoriteCategories(userId: ID!, categoriesIds: [ID]!): User
   }
 `;
