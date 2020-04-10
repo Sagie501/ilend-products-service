@@ -12,18 +12,10 @@ export const typeDefs = gql`
     rating: Float
   }
   
-  type Category {
-    id: ID!
-    name: String
-    description: String
-    imageURI: String
-  }
-  
   extend type User @key(fields: "id") {
     id: ID! @external
     products: [Product]
     wishList: [Product]
-    favoriteCategories: [Category]
   }
 
   extend type Query {

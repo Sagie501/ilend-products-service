@@ -1,4 +1,7 @@
-import { typeDefs as productsTypeDefs } from '../entities/products/products.schema'
-import * as _ from 'lodash';
+import { gql } from 'apollo-server-express';
+import { mergeTypes } from 'merge-graphql-schemas';
+import { typeDefs as productsTypeDefs } from '../entities/product/product.schema';
+import { typeDefs as categoryTypeDefs } from '../entities/category/category.schema';
 
-export const rootTypeDefs = _.merge(productsTypeDefs);
+
+export const rootTypeDefs = gql`${mergeTypes([productsTypeDefs, categoryTypeDefs])}`;
