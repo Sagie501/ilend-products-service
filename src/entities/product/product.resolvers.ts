@@ -4,6 +4,14 @@ export const resolvers = {
       return await dataSources.productsDataSource.productConnector.getFirstProduct();
     }
   },
+  Mutation: {
+    addProduct: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.addProduct(args.ownerId, args.categoryId, args.product);
+    },
+    deleteProduct: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.deleteProduct(args.productId);
+    }
+  },
   Product: {
     owner: (product) => {
       return { __typename: "User", id: product.ownerId };

@@ -1,4 +1,5 @@
 import Knex from 'knex';
+import { Product } from './product.model';
 
 export class ProductConnector {
   private knex: Knex;
@@ -11,6 +12,10 @@ export class ProductConnector {
     return this.knex.select('*').from('product').first();
   }
 
+  async getProductById(productId: number) {
+    return this.knex.select('*').from('product').where({ id: productId }).first();
+  }
+
   async getProductsByOwnerId(ownerId: number) {
     return this.knex.select('*').from('product').where({ ownerId });
   }
@@ -19,10 +24,30 @@ export class ProductConnector {
     let subQuery = this.knex
         .select('productId')
         .from('wish_list')
-        .where({userId});
+        .where({ userId });
     return this.knex
         .select('*')
         .from('product')
         .where('id', 'in', subQuery);
+  }
+
+  async addProduct(ownerId: number, categoryId: number, product: Product) {
+    return this.knex.insert({ ownerId, categoryId, ...product }).into('product').then(([id]) => {
+      return this.getProductById(id);
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    });
+  }
+
+  async deleteProduct(productId: number) {
+    return this.knex('product').where('id', productId).del().then((res) => {
+      if (res === 0) {
+        throw new Error(`The product with id: ${productId} not found`);
+      } else {
+        return true;
+      }
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    })
   }
 }

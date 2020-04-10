@@ -12,6 +12,13 @@ export const typeDefs = gql`
     rating: Float
   }
   
+  input ProductInput {
+    name: String
+    description: String
+    imageURI: String
+    requestedPrice: Float
+  }
+  
   extend type User @key(fields: "id") {
     id: ID! @external
     products: [Product]
@@ -20,5 +27,10 @@ export const typeDefs = gql`
 
   extend type Query {
     getFirstProduct: Product
+  }
+  
+  extend type Mutation {
+    addProduct(ownerId: ID!, categoryId: ID!, product: ProductInput!): Product
+    deleteProduct(productId: ID!): Boolean
   }
 `;
