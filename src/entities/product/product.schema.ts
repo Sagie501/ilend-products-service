@@ -33,7 +33,7 @@ export const typeDefs = gql`
   
   extend type Mutation {
     addProduct(ownerId: ID!, categoryId: ID!, product: ProductInput!): Product
-    deleteProduct(productId: ID!): Boolean
+    removeProduct(productId: ID!): Boolean
     addToWishList(userId: ID!, productId: ID!): User
     removeFromWishList(userId: ID!, productId: ID!): User
   }

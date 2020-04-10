@@ -39,7 +39,7 @@ export class ProductConnector {
     });
   }
 
-  async deleteProduct(productId: number) {
+  async removeProduct(productId: number) {
     return this.knex('product').where('id', productId).del().then((res) => {
       if (res === 0) {
         throw new Error(`The product with id: ${productId} not found`);

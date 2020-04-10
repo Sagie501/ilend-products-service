@@ -14,8 +14,8 @@ export const resolvers = {
     addProduct: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.addProduct(args.ownerId, args.categoryId, args.product);
     },
-    deleteProduct: async (source, args, { dataSources }) => {
-      return await dataSources.productsDataSource.productConnector.deleteProduct(args.productId);
+    removeProduct: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.removeProduct(args.productId);
     },
     addToWishList: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.addToWishList(args.userId, args.productId);
