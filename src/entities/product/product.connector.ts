@@ -1,10 +1,9 @@
 import Knex from 'knex';
-import { Product } from './product.model';
 
 export class ProductConnector {
-  private knex: Knex<Product>;
+  private knex: Knex;
 
-  constructor(knex: Knex<Product>) {
+  constructor(knex: Knex) {
     this.knex = knex;
   }
 

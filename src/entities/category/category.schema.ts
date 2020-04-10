@@ -12,4 +12,8 @@ export const typeDefs = gql`
     id: ID! @external
     favoriteCategories: [Category]
   }
+  
+  extend type Mutation {
+    addFavoriteCategories(userId: ID!, categoriesIds: [ID]!): User
+  }
 `;
