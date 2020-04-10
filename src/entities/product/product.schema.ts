@@ -17,6 +17,7 @@ export const typeDefs = gql`
     description: String
     imageURI: String
     requestedPrice: Float
+    rating: Float
   }
   
   extend type User @key(fields: "id") {
@@ -33,6 +34,7 @@ export const typeDefs = gql`
   
   extend type Mutation {
     addProduct(ownerId: ID!, categoryId: ID!, product: ProductInput!): Product
+    updateProduct(productId: ID!, product: ProductInput!): Product
     removeProduct(productId: ID!): Boolean
     addToWishList(userId: ID!, productId: ID!): User
     removeFromWishList(userId: ID!, productId: ID!): User

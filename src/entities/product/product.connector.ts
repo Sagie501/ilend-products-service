@@ -39,6 +39,14 @@ export class ProductConnector {
     });
   }
 
+  async updateProduct(productId: number, product: Product) {
+    return this.knex('product').where({ id: productId }).update(product).then((id) => {
+      return this.getProductById(id);
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    });
+  }
+
   async removeProduct(productId: number) {
     return this.knex('product').where('id', productId).del().then((res) => {
       if (res === 0) {
