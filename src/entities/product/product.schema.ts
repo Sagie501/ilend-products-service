@@ -26,7 +26,8 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    getFirstProduct: Product
+    getProducts: [Product]
+    getProductById(productId: ID!): Product
   }
   
   extend type Mutation {

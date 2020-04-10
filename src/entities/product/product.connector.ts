@@ -8,8 +8,8 @@ export class ProductConnector {
     this.knex = knex;
   }
 
-  async getFirstProduct() {
-    return this.knex.select('*').from('product').first();
+  async getProducts() {
+    return this.knex.select('*').from('product');
   }
 
   async getProductById(productId: number) {

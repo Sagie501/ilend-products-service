@@ -1,7 +1,10 @@
 export const resolvers = {
   Query: {
-    getFirstProduct: async (source, args, { dataSources }) => {
-      return await dataSources.productsDataSource.productConnector.getFirstProduct();
+    getProducts: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.getProducts();
+    },
+    getProductById: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.getProductById(args.productId);
     }
   },
   Mutation: {
