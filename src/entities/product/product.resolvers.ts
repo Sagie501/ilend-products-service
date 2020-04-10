@@ -16,6 +16,12 @@ export const resolvers = {
     },
     deleteProduct: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.deleteProduct(args.productId);
+    },
+    addToWishList: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.addToWishList(args.userId, args.productId);
+    },
+    removeFromWishList: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.removeFromWishList(args.userId, args.productId);
     }
   },
   Product: {

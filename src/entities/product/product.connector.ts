@@ -50,4 +50,20 @@ export class ProductConnector {
       throw new Error(err.sqlMessage);
     })
   }
+
+  async addToWishList(userId: number, productId: number) {
+    return this.knex.insert({ userId, productId }).into('wish_list').then(() => {
+      return this.knex.select('*').from('user').where({id: userId}).first();
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    });
+  }
+
+  async removeFromWishList(userId: number, productId: number) {
+    return this.knex('wish_list').where({ userId, productId}).del().then(() => {
+      return this.knex.select('*').from('user').where({id: userId}).first();
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    });
+  }
 }
