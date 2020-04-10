@@ -13,6 +13,10 @@ export const typeDefs = gql`
     favoriteCategories: [Category]
   }
   
+  extend type Query {
+    getUserFavoriteCategories(userId: ID!): [Category]
+  }
+  
   extend type Mutation {
     addFavoriteCategories(userId: ID!, categoriesIds: [ID]!): User
   }

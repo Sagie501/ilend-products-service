@@ -5,6 +5,9 @@ export const resolvers = {
     },
     getProductById: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.getProductById(args.productId);
+    },
+    getUserWishList: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.getUserWishList(args.userId);
     }
   },
   Mutation: {
