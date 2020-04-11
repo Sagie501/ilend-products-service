@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "build": "tsc",
+    "build": "npm run clean && tsc",
+    "clean": "rimraf dist/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -30,6 +31,7 @@
     "@types/lodash": "^4.14.149",
     "@types/node": "^13.11.0",
     "nodemon": "^2.0.2",
+    "rimraf": "^3.0.2",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
   }
