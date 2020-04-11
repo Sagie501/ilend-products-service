@@ -1,7 +1,7 @@
 import Knex from 'knex';
 
 const baseConfig: Config = {
-  port: parseInt(process.env.PORT, 10) || 5000,
+  port: parseInt(process.env.PORT, 10) || 5001,
   serviceName: process.env.SERVICE_NAME || 'Products Service',
   dbConfig: {
     client: process.env.DB_CLIENT || 'mysql',
