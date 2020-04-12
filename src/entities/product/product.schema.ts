@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
-  type Product {
+  type Product @key(fields: "id") {
     id: ID!
     owner: User
     category: Category
