@@ -4,4 +4,4 @@ import { typeDefs as productsTypeDefs } from '../entities/product/product.schema
 import { typeDefs as categoryTypeDefs } from '../entities/category/category.schema';
 
 
-export const rootTypeDefs = gql`${mergeTypes([productsTypeDefs, categoryTypeDefs])}`;
+export const rootTypeDefs = gql`${mergeTypes([categoryTypeDefs, productsTypeDefs])}`;

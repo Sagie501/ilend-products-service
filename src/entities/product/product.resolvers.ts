@@ -31,6 +31,9 @@ export const resolvers = {
     owner: (product) => {
       return { __typename: 'User', id: product.ownerId };
     },
+    category: (product, args, { dataSources }) => {
+      return dataSources.productsDataSource.categoryConnector.getCategoryById(product.categoryId);
+    },
     __resolveReference: async (product, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.getProductById(product.id)
     }
