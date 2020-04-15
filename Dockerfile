@@ -2,7 +2,7 @@ FROM node:latest
 
 WORKDIR /home/cs806/ilend/ilend-products-service
 
-COPY * ./
+COPY . .
 
 RUN npm install
 
