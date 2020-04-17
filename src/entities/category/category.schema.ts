@@ -14,6 +14,7 @@ export const typeDefs = gql`
   }
   
   extend type Query {
+    getCategories: [Category]
     getUserFavoriteCategories(userId: ID!): [Category]
   }
   

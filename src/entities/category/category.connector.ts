@@ -11,6 +11,10 @@ export class CategoryConnector {
     return this.knex.select('*').from('category').where({ id: categoryId}).first();
   }
 
+  async getCategories() {
+    return this.knex.select('*').from('category');
+  }
+
   async getUserFavoriteCategories(userId: number) {
     return this.knex
         .select('*')
