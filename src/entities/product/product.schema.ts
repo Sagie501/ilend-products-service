@@ -10,6 +10,7 @@ export const typeDefs = gql`
     pictureLinks: JSON
     requestedPrice: Float
     rating: Float
+    comments: [Comment]
   }
   
   input ProductInput {

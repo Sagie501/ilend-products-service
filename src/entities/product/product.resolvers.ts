@@ -34,6 +34,9 @@ export const resolvers = {
     category: (product, args, { dataSources }) => {
       return dataSources.productsDataSource.categoryConnector.getCategoryById(product.categoryId);
     },
+    comments: (product, args, { dataSources }) => {
+      return dataSources.productsDataSource.commentConnector.getCommentsByProductId(product.id);
+    },
     __resolveReference: async (product, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.getProductById(product.id)
     }
