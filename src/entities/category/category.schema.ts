@@ -5,7 +5,7 @@ export const typeDefs = gql`
     id: ID!
     name: String
     description: String
-    imageURI: String
+    pictureLink: String
   }
   
   extend type User @key(fields: "id") {

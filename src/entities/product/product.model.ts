@@ -2,7 +2,7 @@ export interface Product {
   id: number;
   name: string;
   description: string;
-  imageURI: string;
+  pictureLinks: Array<string>;
   requestedPrice: number;
   rating: number;
   ownerId: number;

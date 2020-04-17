@@ -7,7 +7,7 @@ export const typeDefs = gql`
     category: Category
     name: String
     description: String
-    imageURI: String
+    pictureLinks: JSON
     requestedPrice: Float
     rating: Float
   }

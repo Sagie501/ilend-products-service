@@ -2,5 +2,5 @@ export class Category {
   id: number;
   name: string;
   description: string;
-  imageURI: string;
+  pictureLink: string;
 }
