@@ -8,6 +8,9 @@ export const resolvers = {
     },
     getUserWishList: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.getUserWishList(args.userId);
+    },
+    getProductsByUserId: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.getProductsByOwnerId(args.userId);
     }
   },
   Mutation: {

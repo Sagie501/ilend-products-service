@@ -31,6 +31,7 @@ export const typeDefs = gql`
     getProducts: [Product]
     getProductById(productId: ID!): Product
     getUserWishList(userId: ID!): [Product]
+    getProductsByUserId(userId: ID!): [Product]
   }
   
   extend type Mutation {
