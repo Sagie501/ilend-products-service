@@ -16,7 +16,7 @@ export const typeDefs = gql`
   input ProductInput {
     name: String
     description: String
-    imageURI: String
+    pictureLinks: JSON
     requestedPrice: Float
     rating: Float
   }
