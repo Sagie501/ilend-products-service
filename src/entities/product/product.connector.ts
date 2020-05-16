@@ -32,6 +32,7 @@ export class ProductConnector {
   }
 
   async addProduct(ownerId: number, categoryId: number, product: Product) {
+    product.pictureLinks = JSON.stringify(product.pictureLinks);
     return this.knex.insert({ ownerId, categoryId, ...product }).into('product').then(([id]) => {
       return this.getProductById(id);
     }, (err) => {
@@ -40,6 +41,9 @@ export class ProductConnector {
   }
 
   async updateProduct(productId: number, product: Product) {
+    if (product.pictureLinks) {
+      product.pictureLinks = JSON.stringify(product.pictureLinks);
+    }
     return this.knex('product').where({ id: productId }).update(product).then((id) => {
       return this.getProductById(id);
     }, (err) => {
