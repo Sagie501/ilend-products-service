@@ -11,6 +11,11 @@ const baseConfig: Config = {
       password : process.env.DB_PASSWORD || '1qaz!QAZ',
       database : process.env.DB_SCHEMA || 'ilend'
     }
+  },
+  imgurConfig: {
+    url: 'https://api.imgur.com/3/image',
+    clientId: '275f0ff3a3d4ad3',
+    clientSecret: 'f1250730425f496a21d64c9590c3156ffa0fe675'
   }
 };
 
@@ -40,5 +45,10 @@ export interface EnvironmentConfig {
 export interface Config {
   port: number;
   serviceName: string;
-  dbConfig: Knex.Config
+  dbConfig: Knex.Config;
+  imgurConfig: {
+    url: string;
+    clientId: string;
+    clientSecret: string;
+  };
 }

@@ -1,5 +1,7 @@
 import Knex from 'knex';
 import { Product } from './product.model';
+import { default as axios } from 'axios';
+import { Environment } from '../../environment/environment';
 
 export class ProductConnector {
   private knex: Knex;
@@ -32,7 +34,21 @@ export class ProductConnector {
   }
 
   async addProduct(ownerId: number, categoryId: number, product: Product) {
-    product.pictureLinks = JSON.stringify(product.pictureLinks);
+    let imgurConfig = Environment.getConfig().imgurConfig;
+    let promises = [];
+    for (let i = 0; i < product.pictureLinks.length; i++) {
+      promises.push(axios.post(imgurConfig.url, {
+        image: product.pictureLinks[i]
+      }, {
+        headers: {
+          Authorization: `Client-ID ${imgurConfig.clientId}`
+        }
+      }));
+    }
+
+    let imgurResult = await Promise.all(promises);
+    product.pictureLinks = JSON.stringify(imgurResult.map((res) => res.data.data.link));
+
     return this.knex.insert({ ownerId, categoryId, ...product }).into('product').then(([id]) => {
       return this.getProductById(id);
     }, (err) => {
@@ -42,7 +58,20 @@ export class ProductConnector {
 
   async updateProduct(productId: number, product: Product) {
     if (product.pictureLinks) {
-      product.pictureLinks = JSON.stringify(product.pictureLinks);
+      let imgurConfig = Environment.getConfig().imgurConfig;
+      let promises = [];
+      for (let i = 0; i < product.pictureLinks.length; i++) {
+        promises.push(axios.post(imgurConfig.url, {
+          image: product.pictureLinks[i]
+        }, {
+          headers: {
+            Authorization: `Client-ID ${imgurConfig.clientId}`
+          }
+        }));
+      }
+
+      let imgurResult = await Promise.all(promises);
+      product.pictureLinks = JSON.stringify(imgurResult.map((res) => res.data.data.link));
     }
     return this.knex('product').where({ id: productId }).update(product).then((id) => {
       return this.getProductById(id);
@@ -65,15 +94,15 @@ export class ProductConnector {
 
   async addToWishList(userId: number, productId: number) {
     return this.knex.insert({ userId, productId }).into('wish_list').then(() => {
-      return this.knex.select('*').from('user').where({id: userId}).first();
+      return this.knex.select('*').from('user').where({ id: userId }).first();
     }, (err) => {
       throw new Error(err.sqlMessage);
     });
   }
 
   async removeFromWishList(userId: number, productId: number) {
-    return this.knex('wish_list').where({ userId, productId}).del().then(() => {
-      return this.knex.select('*').from('user').where({id: userId}).first();
+    return this.knex('wish_list').where({ userId, productId }).del().then(() => {
+      return this.knex.select('*').from('user').where({ id: userId }).first();
     }, (err) => {
       throw new Error(err.sqlMessage);
     });
