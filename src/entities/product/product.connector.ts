@@ -56,7 +56,7 @@ export class ProductConnector {
     });
   }
 
-  async updateProduct(productId: number, product: Product) {
+  async updateProduct(productId: number, categoryId: number, product: Product) {
     if (product.pictureLinks) {
       let imgurConfig = Environment.getConfig().imgurConfig;
       let promises = [];
@@ -73,8 +73,8 @@ export class ProductConnector {
       let imgurResult = await Promise.all(promises);
       product.pictureLinks = JSON.stringify(imgurResult.map((res) => res.data.data.link));
     }
-    return this.knex('product').where({ id: productId }).update(product).then((id) => {
-      return this.getProductById(id);
+    return this.knex('product').where({ id: productId }).update({ categoryId, ...product }).then(() => {
+      return this.getProductById(productId);
     }, (err) => {
       throw new Error(err.sqlMessage);
     });

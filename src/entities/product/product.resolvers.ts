@@ -18,7 +18,7 @@ export const resolvers = {
       return await dataSources.productsDataSource.productConnector.addProduct(args.ownerId, args.categoryId, args.product);
     },
     updateProduct: async (source, args, { dataSources }) => {
-      return await dataSources.productsDataSource.productConnector.updateProduct(args.productId, args.product);
+      return await dataSources.productsDataSource.productConnector.updateProduct(args.productId, args.categoryId, args.product);
     },
     removeProduct: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.removeProduct(args.productId);
