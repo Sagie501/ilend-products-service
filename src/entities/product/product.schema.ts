@@ -38,6 +38,7 @@ export const typeDefs = gql`
     addProduct(ownerId: ID!, categoryId: ID!, product: ProductInput!): Product
     updateProduct(productId: ID!, categoryId: ID!, product: ProductInput!): Product
     removeProduct(productId: ID!): Boolean
+    addNewRating(productId: ID!, rating: Float!): Product
     addToWishList(userId: ID!, productId: ID!): User
     removeFromWishList(userId: ID!, productId: ID!): User
   }

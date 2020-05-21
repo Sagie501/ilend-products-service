@@ -28,6 +28,9 @@ export const resolvers = {
     },
     removeFromWishList: async (source, args, { dataSources }) => {
       return await dataSources.productsDataSource.productConnector.removeFromWishList(args.userId, args.productId);
+    },
+    addNewRating: async (source, args, { dataSources }) => {
+      return await dataSources.productsDataSource.productConnector.addNewRating(args.productId, args.rating);
     }
   },
   Product: {

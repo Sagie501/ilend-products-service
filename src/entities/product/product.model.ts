@@ -5,6 +5,7 @@ export interface Product {
   pictureLinks: any;
   requestedPrice: number;
   rating: number;
+  numberOfRaters: number;
   ownerId: number;
   categoryId: number;
 }

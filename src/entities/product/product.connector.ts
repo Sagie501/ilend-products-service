@@ -56,7 +56,7 @@ export class ProductConnector {
     });
   }
 
-  async updateProduct(productId: number, categoryId: number, product: Product) {
+  async updateProduct(productId: number, categoryId: number, product: Partial<Product>) {
     if (product.pictureLinks) {
       let imgurConfig = Environment.getConfig().imgurConfig;
       let promises = [];
@@ -105,6 +105,17 @@ export class ProductConnector {
       return this.knex.select('*').from('user').where({ id: userId }).first();
     }, (err) => {
       throw new Error(err.sqlMessage);
+    });
+  }
+
+  async addNewRating(productId: number, rating: number) {
+    let product = await this.getProductById(productId);
+    let numberOfRaters = product.numberOfRaters;
+    let oldRating = product.rating;
+    let newRating = (((oldRating * numberOfRaters) + rating) / (numberOfRaters + 1));
+    return this.updateProduct(productId, product.categoryId, {
+      rating: newRating,
+      numberOfRaters: (numberOfRaters + 1)
     });
   }
 }
