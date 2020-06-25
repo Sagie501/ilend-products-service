@@ -21,7 +21,7 @@
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "graphql": "~15.0.0",
-    "graphql-scalars": "^1.1.5",
+    "graphql-scalars": "^1.2.1",
     "graphql-tools": "^6.0.9",
     "knex": "^0.21.1",
     "my-sql": "^1.2.15"
