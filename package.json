@@ -20,7 +20,7 @@
     "apollo-server-express": "^2.14.3",
     "axios": "^0.19.2",
     "express": "^4.17.1",
-    "graphql": "~15.0.0",
+    "graphql": "~15.2.0",
     "graphql-scalars": "^1.1.5",
     "graphql-tools": "^6.0.9",
     "knex": "^0.21.1",
