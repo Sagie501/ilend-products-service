@@ -34,7 +34,7 @@ export const typeDefs = gql`
     getProductById(productId: ID!): Product
     getUserWishList(userId: ID!): [Product]
     getProductsByUserId(userId: ID!): [Product]
-    getProductPriceSuggestion(product: ProductInput!): Float
+    getProductPriceSuggestion(productId: ID!): Float
   }
   
   extend type Mutation {

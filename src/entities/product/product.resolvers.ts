@@ -13,7 +13,7 @@ export const resolvers = {
       return await dataSources.productsDataSource.productConnector.getProductsByOwnerId(args.userId);
     },
     getProductPriceSuggestion: async (source, args, { dataSources }) => {
-      return await dataSources.productsDataSource.productConnector.getProductPriceSuggestion(args.product);
+      return await dataSources.productsDataSource.productConnector.getProductPriceSuggestion(args.productId);
     }
   },
   Mutation: {

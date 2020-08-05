@@ -119,7 +119,8 @@ export class ProductConnector {
     });
   }
 
-  async getProductPriceSuggestion(product: Product) {
+  async getProductPriceSuggestion(productId: number) {
+    let product = (await this.getProductById(productId));
     let categoryProducts = (await this.getProducts()).filter((p) => p.categoryId == product.categoryId);
     let fittedProducts: Array<FittedProduct> = [];
     let productNameArray = product.name.toLowerCase().split(' ');
