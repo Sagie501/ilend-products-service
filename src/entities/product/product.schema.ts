@@ -19,6 +19,8 @@ export const typeDefs = gql`
     pictureLinks: JSON
     requestedPrice: Float
     rating: Float
+    ownerId: ID
+    categoryId: ID
   }
   
   extend type User @key(fields: "id") {
@@ -32,11 +34,12 @@ export const typeDefs = gql`
     getProductById(productId: ID!): Product
     getUserWishList(userId: ID!): [Product]
     getProductsByUserId(userId: ID!): [Product]
+    getProductPriceSuggestion(product: ProductInput!): Float
   }
   
   extend type Mutation {
-    addProduct(ownerId: ID!, categoryId: ID!, product: ProductInput!): Product
-    updateProduct(productId: ID!, categoryId: ID!, product: ProductInput!): Product
+    addProduct(product: ProductInput!): Product
+    updateProduct(productId: ID!, product: ProductInput!): Product
     removeProduct(productId: ID!): Boolean
     addNewRating(productId: ID!, rating: Float!): Product
     addToWishList(userId: ID!, productId: ID!): User

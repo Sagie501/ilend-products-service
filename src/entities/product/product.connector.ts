@@ -10,7 +10,7 @@ export class ProductConnector {
     this.knex = knex;
   }
 
-  async getProducts() {
+  async getProducts(): Promise<Array<Product>> {
     return this.knex.select('*').from('product');
   }
 
@@ -118,4 +118,37 @@ export class ProductConnector {
       numberOfRaters: (numberOfRaters + 1)
     });
   }
+
+  async getProductPriceSuggestion(product: Product) {
+    let categoryProducts = (await this.getProducts()).filter((p) => p.categoryId == product.categoryId);
+    let fittedProducts: Array<FittedProduct> = [];
+    let productNameArray = product.name.toLowerCase().split(' ');
+    categoryProducts.forEach((categoryProduct) => {
+      let categoryProductNameArray = categoryProduct.name.toLowerCase().split(' ')
+      let intersection = productNameArray.filter(x => categoryProductNameArray.includes(x));
+      if (intersection.length > 0) {
+        fittedProducts.push({
+          product: categoryProduct,
+          weight: intersection.length
+        })
+      }
+    });
+
+    let suggestedPrice: number = product.requestedPrice;
+    if (fittedProducts.length > 0) {
+      let numeratorAverage = 0;
+      let denominatorAverage = 0;
+      fittedProducts.forEach((fittedProduct) => {
+        numeratorAverage += fittedProduct.product.requestedPrice * fittedProduct.weight;
+        denominatorAverage += fittedProduct.weight;
+      });
+      suggestedPrice = numeratorAverage / denominatorAverage;
+    }
+    return suggestedPrice;
+  }
+}
+
+interface FittedProduct {
+  product: Product;
+  weight: number;
 }
